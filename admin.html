@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>ניהול משימות</title>
+  <style>
+    body { font-family: Arial; padding: 2em; direction: rtl; background: #f7f7f7; }
+    table { width: 100%; border-collapse: collapse; margin-top: 1em; background: white; }
+    th, td { padding: 10px; border: 1px solid #ccc; text-align: center; }
+    th { background-color: #f0f0f0; }
+  </style>
+</head>
+<body>
+  <h1>👑 ניהול משימות לכל המשתמשים</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>משתמש</th>
+        <th>תוכן המשימה</th>
+        <th>הושלמה?</th>
+        <th>תאריך</th>
+      </tr>
+    </thead>
+    <tbody id="admin-task-table"></tbody>
+  </table>
+
+  <script>
+    fetch("/.netlify/functions/getAllTodos")
+      .then(res => res.json())
+      .then(data => {
+        const tbody = document.getElementById("admin-task-table");
+        data.forEach(task => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${task.user_id}</td>
+            <td>${task.task}</td>
+            <td>${task.is_complete ? '✔️' : '❌'}</td>
+            <td>${new Date(task.created_at).toLocaleString()}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      })
+      .catch(err => {
+        alert("שגיאה בטעינה: " + err.message);
+        console.error(err);
+      });
+  </script>
+</body>
+</html>

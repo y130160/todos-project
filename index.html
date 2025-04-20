@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>רשימת משימות</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="auth-section">
+    <h2>התחברות / הרשמה</h2>
+    <input type="email" id="email" placeholder="אימייל" />
+    <input type="password" id="password" placeholder="סיסמה" />
+    <button onclick="signUp()">הרשמה</button>
+    <button onclick="signIn()">התחברות</button>
+  </div>
+
+  <div id="todo-section" style="display:none;">
+    <h2>שלום <span id="user-email"></span> 👋</h2>
+    <button onclick="signOut()">התנתקות</button>
+    <h3>המשימות שלי</h3>
+    <input type="text" id="new-task" placeholder="הוסף משימה חדשה" />
+    <button onclick="addTask()">הוסף</button>
+    <ul id="tasks-list"></ul>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@1"></script>
+  <script src="script.js"></script>
+</body>
+</html>
